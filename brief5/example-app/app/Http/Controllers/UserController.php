@@ -29,17 +29,17 @@ class UserController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|string|max:255',
-                'phone' => 'required|string|max:20',
+
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:6',
-                'role_id' => 'required|exists:roles,id',
-            ]);
 
+            ]);
+            $validatedData['role_id'] = 3;
             $validatedData['password'] = Hash::make($validatedData['password']);
-            dd($validatedData);
+
             $user = User::create($validatedData);
 
-            return response()->json(['data' => $user, 'message' => 'User created successfully'], 201);
+            return redirect()->route('home');
         } catch (ValidationException $e) {
             return response()->json(['error' => 'Validation Error', 'messages' => $e->errors()], 422);
         } catch (\Exception $e) {

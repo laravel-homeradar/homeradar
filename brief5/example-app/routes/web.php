@@ -40,5 +40,6 @@ Route::get('/data', function () {
 });
 // Route::get('/listing', [PropertyController::class, 'listing'])->name('listing');
 Route::get('/properties/search', [PropertyController::class, 'search'])->name('properties.search');
-Route::get('/listing6', [PropertyController::class, 'search']);
+Route::get('/listing6', [PropertyController::class, 'search'])->name('search');
 Route::post('/storeUser', [UserController::class, 'store'])->name('storeUser');
+Route::post('/userLogin', [UserController::class, 'login'])->name('userLogin');

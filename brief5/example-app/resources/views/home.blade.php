@@ -364,12 +364,14 @@
                             <!--tab -->
                             <div id="tab-1" class="tab-content first-tab">
                                 <div class="custom-form">
-                                    <form method="post" name="registerform">
+
+                                    <form method="POST" action="{{ route('userLogin') }}" name="registerform">
+                                        @csrf
                                         <label>Username or Email Address * <span class="dec-icon"><i class="fal fa-user"></i></span></label>
-                                        <input name="email" type="text" onClick="this.select()" value="">
+                                        <input name="email" type="email" >
                                         <div class="pass-input-wrap fl-wrap">
                                             <label>Password * <span class="dec-icon"><i class="fal fa-key"></i></span></label>
-                                            <input name="password" type="password" autocomplete="off" onClick="this.select()" value="">
+                                            <input name="password" type="password" >
                                             <span class="eye"><i class="fal fa-eye"></i> </span>
                                         </div>
                                         <div class="lost_password">

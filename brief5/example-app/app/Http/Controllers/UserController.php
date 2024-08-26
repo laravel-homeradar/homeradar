@@ -100,4 +100,26 @@ class UserController extends Controller
             return response()->json(['error' => 'Failed to delete user', 'message' => $e->getMessage()], 500);
         }
     }
+    public function login(Request $request)
+{
+    // Validate the incoming request
+    $validatedData = $request->validate([
+        "email" => "required|email",
+        "password" => "required",
+    ]);
+
+    // Attempt to find the user by email
+    $user = User::where('email', $validatedData['email'])->first();
+
+    // If user not found or password does not match
+    if (!$user || !Hash::check($validatedData['password'], $user->password)) {
+        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+    }
+
+    // Log the user in
+    auth()->login($user);
+
+    // If credentials are correct, redirect to the 'search' page (or any other route you prefer)
+    return redirect()->route('search')->with('success', 'Login successfully');
+}
 }
